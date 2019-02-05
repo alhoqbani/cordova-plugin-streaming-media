@@ -72,7 +72,10 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 
 	private void play() {
 		mProgressBar.setVisibility(View.VISIBLE);
-		Uri videoUri = Uri.parse(mVideoUrl);
+		// Just use local files from res/raw
+		int rawId = getResources().getIdentifier(mVideoUrl,  "raw", getPackageName());
+		String path = "android.resource://" + getPackageName() + "/" + rawId;
+		Uri videoUri = Uri.parse(path);
 		try {
 			mVideoView.setOnCompletionListener(this);
 			mVideoView.setOnPreparedListener(this);
